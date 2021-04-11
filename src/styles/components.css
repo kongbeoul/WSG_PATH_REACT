@@ -329,6 +329,7 @@
 .c-menu__item__date {
   font-size: 14px;
   line-height: calc(20 / 14);
+  white-space: nowrap;
 }
 
 .c-tooltip {

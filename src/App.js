@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Header from "components/layout/Header";
-import Toolbar from "components/toolbar";
-import Tree from "components/Tree";
+import Container from "components/layout/Container";
 import { NONE, COMPLETE } from "components/legend/LegendItem";
-import { AppContext } from "components/context";
+import { AppContext } from "store/context";
 import parsing from 'utils/parsing';
 
 export default class App extends React.Component {
@@ -18,7 +17,19 @@ export default class App extends React.Component {
                 ...this.state,
                 selected: index
             })
-        }
+        },
+        matches: false,
+    }
+
+    mq = window.matchMedia("(max-width: 767px)")
+
+    handleMatched = mq => {
+        this.setState({
+            ...this.state,
+            matches: mq.matches
+        })
+
+        console.log(this.state);
     }
 
     componentDidMount() {
@@ -32,27 +43,31 @@ export default class App extends React.Component {
                 return a;
             }, [0, 0]);
 
-            this.setState({
-                ...this.state,
-                data,
-                complete,
-                total
+            this.setState(() => {
+                return {
+                    ...this.state,
+                    data,
+                    complete,
+                    total
+                }
             })
         })
+        this.handleMatched(this.mq);
+        this.mq.addListener(this.handleMatched);
+    }
+
+    componentWillUnmount() {
+        this.mq.removeListener(this.handleMatched);
     }
 
     render() {
-        const { data } = this.state;
         return (
             <div id="wrap" className="l-app">
                 <div className="l-inner">
-                    <Header title="WSG 가이드"/>
-                    <div id="container" className="l-container">
-                        <AppContext.Provider value={this.state}>
-                            <Toolbar items={["전체", ...data.map(v => v.title)]}/>
-                            <Tree />
-                        </AppContext.Provider>
-                    </div>
+                    <AppContext.Provider value={this.state}>
+                        <Header title="WSG 가이드"/>
+                        <Container />
+                    </AppContext.Provider>
                 </div>
             </div>
         )

@@ -9,8 +9,9 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
+    "global": "^4.4.0",
     "lodash": "^4.17.21",
-    "postcss-normalize": "^9.0.0",
+    "postcss-cli": "^8.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -43,12 +44,10 @@
   },
   "devDependencies": {
     "craco-alias": "^2.2.0",
-    "cssnano": "^4.1.11",
-    "dotenv": "^8.2.0",
     "postcss": "^8.2.9",
-    "postcss-cli": "^7.1.2",
-    "postcss-import": "^12.0.1",
-    "postcss-inline-svg": "^4.1.0",
+    "postcss-calc": "7.0.5",
+    "postcss-inline-svg": "4.1.0",
+    "postcss-normalize": "^9.0.0",
     "postcss-preset-env": "^6.7.0"
   }
 }
