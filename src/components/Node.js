@@ -6,7 +6,7 @@ import { STATE, STATE_CLASSES } from "components/legend";
 import { DELETE } from "components/legend/LegendItem";
 
 export default function Node(props) {
-    const {_depID, title, url, state, history, children } = props;
+    const {_depID, title, url, state, history, children: child } = props;
     return (
         <div className={classNames("c-menu__item", { "c-menu__item--delete": state === DELETE })}>
             <div className="c-menu__item__info">
@@ -20,9 +20,9 @@ export default function Node(props) {
                 </div>
             </div>
             {
-                (children && children.length > 0) && <div className="c-menu__item__children">
+                (child && child.length > 0) && <div className="c-menu__item__children">
                     {
-                        map(children, v => {
+                        map(child, v => {
                             return <Node key={uniqueId()} {...v} />
                         })
                     }

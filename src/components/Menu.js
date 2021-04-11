@@ -5,9 +5,9 @@ import Node from 'components/Node';
 import counted from "utils/counted";
 
 export default function Menu(props) {
-    const { title, children } = props;
+    const { title, children: child } = props;
     const [active, setActive] = useState(true);
-    const [complete, total] = (children && children.length > 0) ? counted(children, 0, 1) : [0, 1];
+    const [complete, total] = (child && child.length > 0) ? counted(child, 0, 1) : [0, 1];
 
     const handleClicked = useCallback(() => {
         setActive(!active);
@@ -22,7 +22,7 @@ export default function Menu(props) {
             </div>
             <div className="c-menu__children">
                 {
-                    children.map(v => <Node key={uniqueId()} {...v}/>)
+                    child.map(v => <Node key={uniqueId()} {...v}/>)
                 }
             </div>
         </div>
